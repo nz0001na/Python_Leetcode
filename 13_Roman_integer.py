@@ -46,6 +46,9 @@ Example 5:
 Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+
+Approach 1: use if else
+Approach 2: input desceding, sum; asceding, subtraction
 '''
 
 
@@ -97,8 +100,30 @@ def roman2int(s):
     return sum
 
 
+def roman2int2(s):
+    hashtab = {}
+    hashtab['I'] = 1
+    hashtab['V'] = 5
+    hashtab['X'] = 10
+    hashtab['L'] = 50
+    hashtab['C'] = 100
+    hashtab['D'] = 500
+    hashtab['M'] = 1000
+
+    sum = 0
+    for i in range(len(s)):
+        ch = s[i]
+        if i == 0:
+            sum = hashtab[ch]
+        else:
+            pch = s[i-1]
+            if hashtab[ch] > hashtab[pch]:
+                sum += hashtab[ch] - 2 * hashtab[pch]
+            else:
+                sum += hashtab[ch]
+    return sum
 
 
 
-s = 'IX'
+s = 'LVIII'
 print(roman2int(s))
