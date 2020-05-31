@@ -1,6 +1,7 @@
 '''
 189. Rotate Array
 Easy
+https://github.com/grandyang/leetcode/issues/189
 
 Given an array, rotate the array to the right by k steps, where k is non-negative.
 
@@ -32,10 +33,10 @@ k >= 0
 
 '''
 
-
+# use extra array
 def rotatearray(nums, k):
     if k >= len(nums):
-        k -= len(nums)
+        k %= len(nums)
 
     right = []
     for i in range(len(nums)-k, len(nums)):
@@ -51,10 +52,33 @@ def rotatearray(nums, k):
 
 
 
+# swap array
+def swap(left, right, nums):
+    while left < right:
+        t = nums[left]
+        nums[left] = nums[right]
+        nums[right] = t
+        left+= 1
+        right -= 1
 
+def rotatearray2(nums,k):
+    if k >= len(nums):
+        k %= len(nums)
+
+    swap(0, len(nums)-k-1, nums)
+    swap(len(nums)-k, len(nums)-1, nums)
+    swap(0, len(nums)-1, nums)
+    print(nums)
+
+
+
+def rotatearray(nums, k):
+    if k >= len(nums):
+        k %= len(nums)
+    
 
 
 
 nums = [1,2,3,4,5,6,7]
-k = 12
-print(rotatearray(nums, k))
+k = 3
+print(rotatearray2(nums, k))
