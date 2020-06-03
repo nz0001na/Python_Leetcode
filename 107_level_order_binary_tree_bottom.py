@@ -28,6 +28,8 @@ class TreeNode:
 
 
 def levelorder_bottom_up(root):
+    if not root:
+        return
     import queue
 
     q = queue.Queue()
@@ -60,4 +62,4 @@ c = TreeNode(20, a, b)
 d = TreeNode(9, None, None)
 root = TreeNode(3, d, c)
 
-print(levelorder_bottom_up(root))
+print(levelorder_bottom_up(None))
