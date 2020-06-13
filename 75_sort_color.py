@@ -21,6 +21,7 @@ Could you come up with a one-pass algorithm using only constant space?
 
 '''
 
+# two-pass
 def sortcolor(nums):
     r = 0
     w = 0
@@ -41,7 +42,24 @@ def sortcolor(nums):
             nums[j] = 1
     print(nums)
 
+# one-pass
+def sortcolor2(nums):
+    r, b = 0, len(nums)-1
+    i = 0
+    while i <= b:
+        if nums[i] == 0:
+            nums[i], nums[r] = nums[r], nums[i]
+            r += 1
+            i += 1
+        elif nums[i] == 2:
+            nums[i], nums[b] = nums[b], nums[i]
+            b -= 1
+        else:
+            i += 1
+
+    print(nums)
+
 
 nums = [2,0,2,1,1,0,0,0]
-print(sortcolor(nums))
+print(sortcolor2(nums))
 # Output: [0,0,1,1,2,2]
