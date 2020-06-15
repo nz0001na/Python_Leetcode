@@ -54,7 +54,41 @@ def findisland(grid):
 
 
 # BFS
-def findisland2()
+def findisland2(grid):
+    row = len(grid)
+    if row <= 0:
+        return 0
+    col = len(grid[0])
+    if col <= 0:
+        return 0
+
+    dx = [0, -1, 0, 1]
+    dy = [-1, 0, 1, 0]
+    res = 0
+    visit = [[[0] for m in range(col)] for n in range(row)]
+    for i in range(row):
+        for j in range(col):
+            if grid[i][j] == '0' or visit[i][j] == 1: continue
+            res += 1
+            q = []
+            q.insert(0, i*col+j)
+            while len(q):
+                t = q[len(q)-1]
+                q.pop()
+                for k in range(4):
+                    x = t//col + dx[k]
+                    y = t%col + dy[k]
+                    if x<0 or x>=row or y<0 or y>=col or grid[x][y] == '0' or visit[x][y] == 1:
+                        continue
+                    visit[x][y] = 1
+                    q.insert(0, x*col+y)
+    return res
+
+
+
+
+
+
 
 
 grid = [
@@ -63,8 +97,8 @@ grid = [
 ['0','0','1','0','0'],
 ['0','0','0','1','1']
 ]
-grid = [
+grid2 = [
     ["0","1","0"],
     ["1","0","1"],
     ["0","1","0"]]
-print(findisland(grid))
+print(findisland2(grid))
