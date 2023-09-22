@@ -2,4 +2,4 @@
 
 Coding Practice:
 
-My Solutions of leetcode problems using python language.
+Solutions of leetcode problems using python language.
