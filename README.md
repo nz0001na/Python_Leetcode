@@ -1,4 +1,4 @@
-# Leetcode_problem
+# Leetcode problem Solutions
 
 Coding Practice:
 
