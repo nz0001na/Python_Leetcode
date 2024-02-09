@@ -1,5 +1,6 @@
-# Leetcode problem Solutions
+# Leetcode coding problem Solutions: Python
+Java/C++: refer to [[link]](https://github.com/grandyang/leetcode?tab=readme-ov-file)
 
-Coding Practice:
+1. Twosum: [[link]](https://github.com/grandyang/leetcode/issues/1)
 
-Solutions of leetcode problems using python language.
+https://github.com/grandyang/leetcode/issues/1
