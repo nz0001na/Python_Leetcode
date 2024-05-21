@@ -3,15 +3,21 @@ Given an array nums of distinct integers, return all the possible permutations.
 You can return the answer in any order.
 '''
 
+'''
+deep copy out, to append into res.
 
+
+'''
 
 from copy import deepcopy
 
 def DFS(nums, level, out, res, visited):
+    # base
     if level == len(nums):
         o = deepcopy(out)
         res.append(o)
         return
+    # recursion
     for i in range(len(nums)):
         if visited[i] == 1:
             continue
