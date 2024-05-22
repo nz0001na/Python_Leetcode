@@ -1,5 +1,36 @@
 '''
-1
+Question:  (medium)
+Given a string s, return the longest palindromic substring in s.
+
+Example 1:
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+
+Example 2:
+Input: s = "cbbd"
+Output: "bb"
+
+Constraints:
+1 <= s.length <= 1000
+s consist of only digits and English letters.
+
+'''
+
+
+'''
+Solution 1: 
+brute-force
+
+Use two loops:
+ outer loop i: begin index of substring, [0,len(s)-1]
+   inner loop j: end index of substring, [i+1, len(s)]
+      loop body: check s[i,j] if it is a palindromic string
+                 if yes, check size of it, and update maxLen and result.
+
+how to check if it is a palindromic string?
+    use while loop with condition (i<j): i is left point, j is right point.
+
 '''
 class Solution:
     def longestPalindrome(self, s: str) -> str:
@@ -27,6 +58,16 @@ class Solution:
 
 '''
 DP
+create a 2-d array, initialized with 0, the values in it means: dp[i][j], if the substring s[i:j] is palindromic.
+
+theory: 
+    for string s : E_i E_(i+1) ..... E_{i+k-2} E_{i+k-1}
+    if substring E_(i+1) ..... E_{i+k-2} is palindromic and E_i == E_{i+k-1},
+    s is palindromic too.
+
+here, k: the length of substring
+      i: beginning index
+
 '''
 class Solution:
     def longestPalindrome(self, s: str) -> str:
