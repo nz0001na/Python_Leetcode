@@ -1,8 +1,54 @@
 '''
-des_i as target index of dividing 0 and 1 strings.
-O(n*n)
+926. (medium)
+
+A binary string is monotone increasing if it consists of some number of 0's (possibly none),
+followed by some number of 1's (also possibly none).
+
+You are given a binary string s. You can flip s[i] changing it from 0 to 1 or from 1 to 0.
+Return the minimum number of flips to make s monotone increasing.
+
+
+Example 1:
+Input: s = "00110"
+Output: 1
+Explanation: We flip the last digit to get 00111.
+
+Example 2:
+Input: s = "010110"
+Output: 2
+Explanation: We flip to get 011111, or alternatively 000111.
+
+Example 3:
+Input: s = "00011000"
+Output: 2
+Explanation: We flip to get 00000000.
+
+
+
+Constraints:
+
+    1 <= s.length <= 105
+    s[i] is either '0' or '1'.
+
 '''
 
+
+'''
+Solution 1:
+    use for loop [0,1,....des_i, ... len(s)-1],  des_i as target index of dividing 0 and 1 strings.
+    [0,1,....des_i-1]:    0 string
+    [des_i, .... len(s)-1]:    1 string
+    
+    at des_i, count:
+        flip0:  #flip 1->0 in [0,1,....des_i-1]
+        flip1:  #flip 0->1 in [des_i, .... len(s)-1]
+    add flip0 and flip1, and compare with the value of minflip.
+    minflip stores the current minimum flips.
+    
+
+O(n*n)
+
+'''
 class Solution:
     def minFlipsMonoIncr(self, s: str) -> int:
         num = len(s)
@@ -32,45 +78,23 @@ class Solution:
 
 
 '''
+Solution 2:
+Dynamic Programming
+
+Create two lists: flip0 and flip1.
+
+flip0[i]: stores the flip numbers in substring [0,...i-1] of 1->0.
+          flip0[i] = flip0[i - 1] + int(s[i-1] == '1')
+
+flip1[j]: stores the flip numbers in substring [j, n-1] of 0->1.
+          flip1[j] = flip1[j+1] + int(s[j] == '0')
+
+for loop: 
+   calculate the sum of flip0[i]+flip1[i], and get the minimum value.
+
+time: O(n)
+space: O(n)
 '''
-
-
-class Solution:
-    def minFlipsMonoIncr(self, s: str) -> int:
-        num = len(s)
-        if num == 0:
-            return None
-
-        minFlip = num
-        flip0 = 0
-        flip1 = 0
-        for i in range(num + 1):
-            if i == 0:
-                flip0 = 0
-                flip1 = s.count('0')
-            elif i == num:
-                flip0 = s.count('1')
-                flip1 = 0
-            else:
-                flip0 = s[0:i].count('1')
-                flip1 = s[i:num].count('0')
-            if flip0 + flip1 < minFlip:
-                minFlip = flip0 + flip1
-        return minFlip
-
-
-
-
-'''
-用动态规划 Dynamic Programming 来做，需要使用两个 dp 数组，其中 
-flip0[i] 表示将范围是 [0, i-1] 的子串内最小的将1转为0的个数，从而形成单调字符串。
-同理，flip1[j] 表示将范围是 [j, n-1] 的子串内最小的将0转为1的个数，从而形成单调字符串。
-这样最终在某个位置使得 flip0[i]+flip1[i] 最小的时候，就是变为单调串的最优解，
-
-O(n)
-O(n)
-'''
-
 
 class Solution:
     def minFlipsMonoIncr(self, s: str) -> int:
@@ -103,10 +127,22 @@ class Solution:
 
 
 '''
-presum: sum of '1' before j, [0, j-1]
-postsum: sum of '1' after j, [j, num]
-O(n)
-O(1)
+Solution 3:
+
+create two variables: 
+    presum: sum of '1' before j, [0, j-1]
+    postsum: sum of '1' after j, [j, num]
+
+for loop on list s, [0:len(s)]
+    
+    presum += int(s[j-1]=='1')
+    postsum -= int(s[j-1]=='1')
+    flip0 = presum
+    flip1 = num-j-postsum
+
+
+time: O(n)
+space: O(1)
 '''
 class Solution:
     def minFlipsMonoIncr(self, s: str) -> int:
