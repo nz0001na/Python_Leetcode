@@ -1,95 +1,61 @@
 '''
-20. Valid Parentheses
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+20. (easy)
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
+determine if the input string is valid.
 
 An input string is valid if:
-Open brackets must be closed by the same type of brackets.
-Open brackets must be closed in the correct order.
+    Open brackets must be closed by the same type of brackets.
+    Open brackets must be closed in the correct order.
+    Every close bracket has a corresponding open bracket of the same type.
 
-Note that an empty string is also considered valid.
 
 Example 1:
-Input: "()"
+Input: s = "()"
 Output: true
 
 Example 2:
-Input: "()[]{}"
+Input: s = "()[]{}"
 Output: true
 
 Example 3:
-Input: "(]"
+Input: s = "(]"
 Output: false
 
-Example 4:
-Input: "([)]"
-Output: false
 
-Example 5:
-Input: "{[]}"
-Output: true
+Constraints:
+    1 <= s.length <= 104
+    s consists of parentheses only '()[]{}'.
+
+'''
+
+'''
+Solution:
+
+
+
 
 '''
 
 
-def valid_parentheses(s):
-    stack = []
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s) == 0:
+            return
 
-    for ch in s:
-        if ch == '(' or ch == '{' or ch == '[':
-            stack.append(ch)
-        if ch == ')':
-            if len(stack) > 0:
-                if stack[len(stack) - 1] == '(':
-                    stack.pop()
-                else:
-                    return False
+        keys = {')': '(', '}': '{', ']': '['}
+        stack = []
+        for c in s:
+            if c in ['{', '(', '[']:
+                stack.append(c)
             else:
-                return False
-        if ch == '}':
-            if len(stack) > 0:
-                if stack[len(stack) - 1] == '{':
-                    stack.pop()
-                else:
+                if len(stack) == 0 or stack[-1] != keys[c]:
                     return False
-            else:
-                return False
-        if ch == ']':
-            if len(stack) > 0:
-                if stack[len(stack)-1] == '[':
-                    stack.pop()
-                else:
-                    return False
-            else:
-                return False
-
-    if len(stack) == 0:
-        return True
+                # or stack.pop()
+                del stack[-1]
 
 
-def valid_parentheses2(s):
-    map = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
-    }
-    stack = []
-
-    for ch in s:
-        if ch=='(' or ch == '[' or ch=='{':
-            stack.append(ch)
-        else:
-            if len(stack) > 0:
-                if stack[len(stack)-1] == map.get(ch):
-                    stack.pop()
-                else:
-                    return False
-            else:
-                return False
-    if len(stack) ==0:
-        return True
-    else:
-        return False
+        if len(stack) == 0:
+            return True
 
 
-s = '{[]}'
-print(valid_parentheses2(s))
