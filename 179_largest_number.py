@@ -25,31 +25,30 @@ Constraints:
 
 '''
 *************************************************************
-Solution:
+Solution: Bubble sort
+    for string, if a+b > b+a, a>b
 
-
-
-
-
+    (1) outer loop: for 0 to len(nums)-1
+    (2) inner loop: for 0 to len(nums)-1-i (for each loop, the last element is set in place)
+        compare two adjacent elements,
+        put smaller one at the location after the bigger one.
+    
 '''
 
-nums = [10, 4, 5]
-res = ''
-s = [str(c) for c in nums]
-d = s.sort(reverse=True)
-print(d)
-for c in s:
-    res += c
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        s = [str(c) for c in nums]
+        for i in range(len(s)-1):
+            # last element is alreay in place
+            for j in range(0, len(s)-1-i):
+                if s[j]+s[j+1] < s[j+1]+s[j]:
+                    tmp = s[j+1]
+                    s[j+1] = s[j]
+                    s[j] = tmp
+        res = ''
+        for c in s:
+            res += c
 
-print(res)
-
-
-str1 = '30'
-str2 = '3'
-
-if str1 > str2:
-    print("str1 is bigger than str2")
-elif str1 < str2:
-    print("str2 is bigger than str1")
-else:
-    print("str1 and str2 are equal")
+        if res[0] == '0':
+            return '0'
+        return res
