@@ -6,37 +6,17 @@ class Solution:
         str_b = b.zfill(max_len)
 
         is_add = 0
-        re = []
+        re = ""
         for i in range(max_len-1, -1, -1):
-            if str_a[i] == '1' and str_b[i] == '1':
-                if is_add == 1:
-                    out = '1'                
-                elif is_add == 0:
-                    out = '0'
-                is_add = 1
+            s = int(str_a[i]) + int(str_b[i]) + is_add
+            out = str(s%2)
+            is_add = s//2         
 
-            if str_a[i] == '1' and str_b[i] == '0' or str_a[i] == '0' and str_b[i] == '1':
-                if is_add == 1: 
-                    out = '0'
-                    is_add = 1
-                elif is_add == 0:
-                    out = '1'
-
-            if str_a[i] == '0' and str_b[i] == '0':
-                if is_add == 1: 
-                    out = '1'
-                    is_add = 0
-                elif is_add == 0: 
-                    out = '0'
-
-            re.append(out)
+            re = out + re
         
         
-        if is_add == 1: re.append('1')
-        re.reverse()
-
-        s = ""
-        for i in range(len(re)): s += re[i]
-        return s
+        if is_add == 1: re = '1' + re
+        
+        return re
 
         
