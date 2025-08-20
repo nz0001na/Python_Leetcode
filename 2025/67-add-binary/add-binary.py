@@ -11,9 +11,7 @@ class Solution:
             s = int(str_a[i]) + int(str_b[i]) + is_add
             out = str(s%2)
             is_add = s//2         
-
             re = out + re
-        
         
         if is_add == 1: re = '1' + re
         
